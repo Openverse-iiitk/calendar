@@ -55,6 +55,7 @@ export interface EventCalendarProps {
   onEventDelete?: (eventId: string) => void
   className?: string
   initialView?: CalendarView
+  initialDate?: Date
 }
 
 export function EventCalendar({
@@ -64,8 +65,9 @@ export function EventCalendar({
   onEventDelete,
   className,
   initialView = "month",
+  initialDate,
 }: EventCalendarProps) {
-  const [currentDate, setCurrentDate] = useState(new Date())
+  const [currentDate, setCurrentDate] = useState(() => initialDate ?? new Date())
   const isMobile = useIsMobile()
   const [view, setView] = useState<CalendarView>(isMobile ? "agenda" : initialView)
   const [isEventDialogOpen, setIsEventDialogOpen] = useState(false)
